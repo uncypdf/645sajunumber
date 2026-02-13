@@ -1,32 +1,50 @@
 import type { Metadata } from "next";
 import NumberGenerator from "@/components/NumberGenerator";
 
-export function generateMetadata({ params }: { params: { drawNo: string } }): Metadata {
-  const drawNo = Number(params.drawNo);
-  const safe = Number.isFinite(drawNo) ? drawNo : 0;
+type DrawParams = { drawNo: string };
 
-  const title = `${safe}회 로또 운명 숫자 | 645사주넘버`;
+async function resolveParams(params: DrawParams | Promise<DrawParams>) {
+  return await Promise.resolve(params);
+}
+
+export async function generateMetadata({
+  params,
+}: {
+  params: DrawParams | Promise<DrawParams>;
+}): Promise<Metadata> {
+  const { drawNo: drawNoRaw } = await resolveParams(params);
+  const drawNo = Number(drawNoRaw);
+
+  const isValid = Number.isFinite(drawNo) && drawNo > 0;
+  const canonical = isValid
+    ? `https://www.645sajunumber.com/draw/${drawNo}`
+    : "https://www.645sajunumber.com/draw";
+
+  const title = isValid ? `${drawNo}회 로또 운명 숫자 | 645사주넘버` : "로또 운명 숫자 | 645사주넘버";
   const description = "이번주 당신의 사주 기운을 반영해 운명 숫자 조합을 추천합니다. 발표 전까지 동일하게 유지됩니다.";
-
-  const url = `https://www.645sajunumber.com/draw/${safe}`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: url,
+      canonical,
     },
     openGraph: {
       title,
       description,
-      url,
+      url: canonical,
       type: "website",
     },
   };
 }
 
-export default async function DrawPage({ params }: { params: { drawNo: string } }) {
-  const drawNo = Number(params.drawNo);
+export default async function DrawPage({
+  params,
+}: {
+  params: DrawParams | Promise<DrawParams>;
+}) {
+  const { drawNo: drawNoRaw } = await resolveParams(params);
+  const drawNo = Number(drawNoRaw);
   if (!Number.isFinite(drawNo) || drawNo <= 0) {
     return (
       <main className="min-h-screen bg-zinc-950 text-zinc-100">
