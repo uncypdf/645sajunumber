@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import AdsenseHome from "@/components/AdsenseHome";
 import NumberGenerator from "@/components/NumberGenerator";
 
 export const metadata: Metadata = {
@@ -65,7 +64,8 @@ export default function Home() {
         </div>
       </section>
 
-      <AdsenseHome />
+      {/* AdSense disabled during review to avoid policy flags. Re-enable after approval. */}
+      {/* <AdsenseHome /> */}
     </main>
   );
 }
