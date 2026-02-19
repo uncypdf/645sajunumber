@@ -57,11 +57,7 @@ export default function HowItWorksPage() {
             <Link href="/faq" className="text-sm text-zinc-300 underline underline-offset-4">
               FAQ 보기
             </Link>
-            <span className="mx-2 text-zinc-700">·</span>
-            <Link href="/privacy" className="text-sm text-zinc-300 underline underline-offset-4">
-              개인정보처리방침
-            </Link>
-          </div>
+                      </div>
         </div>
       </div>
     </main>

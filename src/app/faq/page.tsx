@@ -66,19 +66,21 @@ export default function FaqPage() {
             </div>
           ))}
 
+
+
+          <div className="pt-8 border-t border-zinc-800 space-y-3">
+            <h2 className="text-base font-semibold text-zinc-100">문의</h2>
+            <p>
+              문의/제휴/오류 제보는 <span className="font-semibold">htmandu@gmail.com</span> 으로 연락 주세요.
+            </p>
+            <p className="text-xs text-zinc-500">스팸 방지를 위해 사이트에는 메일을 링크로 걸지 않습니다.</p>
+          </div>
+
           <div className="pt-2">
             <Link href="/how-it-works" className="text-sm text-zinc-300 underline underline-offset-4">
               작동 원리
             </Link>
-            <span className="mx-2 text-zinc-700">·</span>
-            <Link href="/privacy" className="text-sm text-zinc-300 underline underline-offset-4">
-              개인정보처리방침
-            </Link>
-            <span className="mx-2 text-zinc-700">·</span>
-            <Link href="/contact" className="text-sm text-zinc-300 underline underline-offset-4">
-              문의
-            </Link>
-          </div>
+                                  </div>
         </div>
       </div>
     </main>
