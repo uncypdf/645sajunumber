@@ -110,9 +110,11 @@ function getOrCreateUserId(): string {
 export default function NumberGenerator({
   variant = "home",
   drawNo,
+  latestDrawNo,
 }: {
   variant?: "home" | "draw";
   drawNo?: number;
+  latestDrawNo?: number | null;
 }) {
 
   const [birthdate, setBirthdate] = useState("");
@@ -312,7 +314,7 @@ export default function NumberGenerator({
           <li>같은 사주를 입력하면 이번 주 추첨결과가 나오기 전 까지 같은 숫자 조합이 나옵니다.</li>
           <li>사용자가 입력한 데이터(생년월일시/이니셜)는 서버에 저장되지 않습니다.</li>
           <li>
-            1회차부터 <b className="text-zinc-300">{winnersData.latest ?? "최근"}회차</b>까지 역대 당첨 조합은 추천에서 제외됩니다.
+            1회차부터 <b className="text-zinc-300">{latestDrawNo ?? winnersData.latest ?? "최근"}회차</b>까지 역대 당첨 조합은 추천에서 제외됩니다.
           </li>
         </ul>
 
