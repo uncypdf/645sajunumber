@@ -17,23 +17,6 @@ export default function Home() {
         Static (server-rendered) content block for AdSense reviewers/crawlers.
         Keeps meaningful publisher content visible even before any client-side hydration.
       */}
-      <section className="mx-auto max-w-xl px-5 pt-10">
-        <h1 className="text-2xl font-semibold tracking-tight">645사주넘버</h1>
-        <p className="mt-2 text-sm text-zinc-400">
-          생년월일(선택: 태어난 시간)과 영문 이니셜을 기반으로 이번 주 로또 번호 조합을 추천합니다. 입력값은 브라우저에서만
-          처리되며 서버에 저장하지 않습니다.
-        </p>
-        <div className="mt-3 text-xs text-zinc-500">
-          <a href="/how-it-works" className="underline underline-offset-4 hover:text-zinc-300">
-            작동 원리
-          </a>
-          <span className="mx-2 text-zinc-700">·</span>
-          <a href="/faq" className="underline underline-offset-4 hover:text-zinc-300">
-            FAQ
-          </a>
-        </div>
-      </section>
-
       <NumberGenerator variant="home" drawNo={914} />
 
       {/* Extra publisher content (helps AdSense + indexing) */}
