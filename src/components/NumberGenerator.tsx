@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import winners from "@/data/winners.json";
+import type { BannerState } from "@/app/api/banner/route";
 import { recommendNumbers, type RecommendResult, type WinnersData } from "@/lib/lotto";
 
 const winnersData = winners as unknown as WinnersData;
@@ -122,6 +123,20 @@ export default function NumberGenerator({
 
   const [results, setResults] = useState<RecommendResult[] | null>(null);
   const [toast, setToast] = useState<string | null>(null);
+
+  const [banner, setBanner] = useState<BannerState | null>(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const res = await fetch("/api/banner", { cache: "no-store" });
+        const j = await res.json();
+        setBanner(j?.state ?? null);
+      } catch {
+        setBanner(null);
+      }
+    })();
+  }, []);
 
   const [isAnimating, setIsAnimating] = useState(false);
   const [pending, setPending] = useState<RecommendResult[] | null>(null);
@@ -255,6 +270,17 @@ export default function NumberGenerator({
       )}
 
       <div className="mx-auto max-w-xl px-5 py-10">
+
+        {variant === "home" && banner && (
+          <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
+            <b className="text-amber-100">🎉 {banner.drawNo}회차 당첨 공지</b>
+            <div className="mt-1 text-amber-100/90">
+              1등 {banner.firstWinners}명 · 2등 {banner.secondWinners}명
+              {typeof banner.thirdWinners === "number" ? ` · 3등 ${banner.thirdWinners}명` : ""}
+            </div>
+          </div>
+        )}
+
 
         <div className="mb-6">
           {variant === "home" ? (
