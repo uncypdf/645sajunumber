@@ -1,0 +1,30 @@
+name: Update winners.json
+on:
+  schedule:
+    - cron: "10 12 * * 6" # Sat 12:10 UTC (21:10 KST)
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: npm ci
+      - run: npm run update:winners
+      - name: Commit & push if changed
+        run: |
+          if git diff --quiet; then
+            echo "No changes"
+            exit 0
+          fi
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add src/data/winners.json
+          git commit -m "chore: update winners.json"
+          git push
