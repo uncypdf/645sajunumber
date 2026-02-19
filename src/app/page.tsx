@@ -17,7 +17,7 @@ export default function Home() {
         Static (server-rendered) content block for AdSense reviewers/crawlers.
         Keeps meaningful publisher content visible even before any client-side hydration.
       */}
-      <NumberGenerator variant="home" drawNo={914} />
+      <NumberGenerator variant="home" />
 
       {/* Extra publisher content (helps AdSense + indexing) */}
       {/* AdSense disabled during review to avoid policy flags. Re-enable after approval. */}
