@@ -271,12 +271,20 @@ export default function NumberGenerator({
 
       <div className="mx-auto max-w-xl px-5 py-10">
 
-        {variant === "home" && banner && (
+        {variant === "home" && (
           <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-            <b className="text-amber-100">🎉 {banner.drawNo}회차 당첨 공지</b>
+            <b className="text-amber-100">
+              {banner ? `🎉 ${banner.drawNo}회차 당첨 공지` : "📌 공지"}
+            </b>
             <div className="mt-1 text-amber-100/90">
-              1등 {banner.firstWinners}명 · 2등 {banner.secondWinners}명
-              {typeof banner.thirdWinners === "number" ? ` · 3등 ${banner.thirdWinners}명` : ""}
+              {banner ? (
+                <>
+                  1등 {banner.firstWinners}명 · 2등 {banner.secondWinners}명
+                  {typeof banner.thirdWinners === "number" ? ` · 3등 ${banner.thirdWinners}명` : ""}
+                </>
+              ) : (
+                <>현재 당첨 공지 데이터를 준비 중입니다.</>
+              )}
             </div>
           </div>
         )}
