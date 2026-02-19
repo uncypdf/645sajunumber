@@ -469,23 +469,13 @@ export default function NumberGenerator({
               <a href="/lotto-number-recommendation" className="underline underline-offset-4 hover:text-zinc-300">
                 사주 기반 로또 번호 추천
               </a>
-              <span className="mx-2 text-zinc-700">·</span>
-              <a href="/how-it-works" className="underline underline-offset-4 hover:text-zinc-300">
+                  <a href="/how-it-works" className="underline underline-offset-4 hover:text-zinc-300">
                 작동 원리
               </a>
-              <span className="mx-2 text-zinc-700">·</span>
-              <a href="/faq" className="underline underline-offset-4 hover:text-zinc-300">
+                  <a href="/faq" className="underline underline-offset-4 hover:text-zinc-300">
                 FAQ
               </a>
-              <span className="mx-2 text-zinc-700">·</span>
-              <a href="/privacy" className="underline underline-offset-4 hover:text-zinc-300">
-                개인정보처리방침
-              </a>
-              <span className="mx-2 text-zinc-700">·</span>
-              <a href="/contact" className="underline underline-offset-4 hover:text-zinc-300">
-                문의
-              </a>
-            </div>
+                    </div>
           </div>
         )}
       </div>
