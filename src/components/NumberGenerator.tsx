@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
 import winners from "@/data/winners.json";
-import type { BannerState } from "@/app/api/banner/route";
 import { recommendNumbers, type RecommendResult, type WinnersData } from "@/lib/lotto";
 
 const winnersData = winners as unknown as WinnersData;
@@ -114,19 +113,6 @@ export default function NumberGenerator({
   variant?: "home" | "draw";
   drawNo?: number;
 }) {
-  const [banner, setBanner] = useState<BannerState | null>(null);
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch("/api/banner", { cache: "no-store" });
-        const j = await res.json();
-        setBanner(j?.state ?? null);
-      } catch {
-        setBanner(null);
-      }
-    })();
-  }, []);
 
   const [birthdate, setBirthdate] = useState("");
   const [initials, setInitials] = useState("");
@@ -179,28 +165,7 @@ export default function NumberGenerator({
 
     void t1;
     void t2;
-
-    // Fire-and-forget: store generated picks (no personal data)
-    const targetDrawNo = drawNo ?? (winnersData.latest ?? 0) + 1;
-    void (async () => {
-      try {
-        await fetch("/api/track", {
-          method: "POST",
-          headers: { "content-type": "application/json" },
-          body: JSON.stringify({
-            picks: out.map((r) => ({
-              numbers: r.numbers,
-              createdAt: Date.now(),
-              targetDrawNo,
-            })),
-          }),
-        });
-      } catch {
-        // ignore
-      }
-    })();
-  }
-
+}
   function showToast(msg: string) {
     setToast(msg);
     window.setTimeout(() => setToast(null), 1200);
@@ -290,14 +255,6 @@ export default function NumberGenerator({
       )}
 
       <div className="mx-auto max-w-xl px-5 py-10">
-        {variant === "home" && banner && (
-          <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
-            <b className="text-amber-100">🎉 {banner.drawNo}회차 당첨 공지</b>
-            <div className="mt-1 text-amber-100/90">
-              1등 {banner.firstWinners ?? 0}명, 2등 {banner.secondWinners ?? 0}명, 3등 {banner.thirdWinners ?? 0}명 (사주넘버 생성번호 기준)
-            </div>
-          </div>
-        )}
 
         <div className="mb-6">
           {variant === "home" ? (

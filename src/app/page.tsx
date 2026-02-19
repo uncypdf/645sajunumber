@@ -31,14 +31,6 @@ export default function Home() {
           <a href="/faq" className="underline underline-offset-4 hover:text-zinc-300">
             FAQ
           </a>
-          <span className="mx-2 text-zinc-700">·</span>
-          <a href="/privacy" className="underline underline-offset-4 hover:text-zinc-300">
-            개인정보처리방침
-          </a>
-          <span className="mx-2 text-zinc-700">·</span>
-          <a href="/contact" className="underline underline-offset-4 hover:text-zinc-300">
-            문의
-          </a>
         </div>
       </section>
 
