@@ -21,6 +21,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     items.push({ url: `${base}/draw/${latest + 1}`, lastModified: now, changeFrequency: "weekly", priority: 0.8 });
   }
 
+  items.push({ url: `${base}/terms`, lastModified: now, changeFrequency: 'yearly', priority: 0.3 });
+
   items.push({ url: `${base}/privacy`, lastModified: now, changeFrequency: "yearly", priority: 0.3 });
   items.push({ url: `${base}/contact`, lastModified: now, changeFrequency: "yearly", priority: 0.3 });
 
