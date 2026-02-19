@@ -1,4 +1,3 @@
-import { kv } from "@vercel/kv";
 import { NextResponse } from "next/server";
 
 export type BannerState = {
@@ -9,7 +8,13 @@ export type BannerState = {
   updatedAt: string;
 };
 
+// Safe banner endpoint. If KV isn't configured, it simply returns null.
 export async function GET() {
-  const state = (await kv.get<BannerState>("banner:current")) ?? null;
-  return NextResponse.json({ ok: true, state });
+  try {
+    const { kv } = await import("@vercel/kv");
+    const state = (await kv.get<BannerState>("banner:current")) ?? null;
+    return NextResponse.json({ ok: true, state });
+  } catch {
+    return NextResponse.json({ ok: true, state: null });
+  }
 }
