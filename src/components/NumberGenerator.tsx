@@ -276,16 +276,15 @@ export default function NumberGenerator({
         {variant === "home" && (
           <div className="mb-5 rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-200">
             <b className="text-amber-100">
-              {banner ? `🎉 ${banner.drawNo}회차 당첨 공지` : "🎉 1211회차 당첨 공지"}
+              {banner ? `🎉 ${banner.drawNo}회차 사주넘버 생성번호 당첨자` : "📌 당첨 공지"}
             </b>
             <div className="mt-1 text-amber-100/90">
               {banner ? (
                 <>
-                  1등 {banner.firstWinners}명 · 2등 {banner.secondWinners}명
-                  {typeof banner.thirdWinners === "number" ? ` · 3등 ${banner.thirdWinners}명` : ""}
+                  1등 - {banner.firstWinners}명 / 2등 - {banner.secondWinners}명 / 3등 - {banner.thirdWinners ?? "-"}명 / 4등 - {banner.fourthWinners ?? "-"}명 / 5등 - {banner.fifthWinners ?? "-"}명
                 </>
               ) : (
-                <>1등 - 0명 / 2등 - 1명 / 3등 5명 / 4등 - 48명 / 5등 - 287명</>
+                <>당첨 공지 데이터를 준비 중입니다.</>
               )}
             </div>
           </div>
